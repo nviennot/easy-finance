@@ -1,0 +1,112 @@
+/* Globals. Should probably go in _app.js */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td, table th {
+  border-top: 1px solid #ddd;
+  padding: 0 1em 0 0;
+}
+
+table td:last-child, table th:last-child {
+  padding-right: 0;
+}
+
+.warning {
+  color: #d02529;
+}
+
+.unimportant {
+  color: #bbb;
+}
+
+.unimportant a {
+  text-decoration: none;
+  color: #99d;
+}
+
+button.delete-button {
+  color: #ccc;
+}
+button.delete-button:hover {
+  color: #555;
+}
+
+/* Transaction page specific */
+
+.balances {
+  margin: 2em;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+.balances span {
+  display: block;
+}
+
+.balances .balance {
+  white-space: nowrap;
+  margin: 1em 2em;
+  margin-bottom: 1.2em;
+  text-align: center;
+}
+
+@media (max-width: 450px) {
+  .balances {
+    font-size: 0.9em;
+  }
+}
+
+.balances .amount {
+  font-size: 3.0em;
+  font-weight: 500;
+}
+
+.balances .name {
+  color: #333;
+}
+
+.transactions-page h2 {
+  font-size: 1.4em;
+  margin-bottom: 0.3em;
+}
+
+.transactions-page table.transactions {
+  /* font-size: 0.9em; */
+}
+
+.transactions-page table.transactions td {
+  white-space: nowrap;
+}
+
+.transactions-page table.transactions td.name {
+  white-space: normal;
+  padding-right: 0.2em;
+}
+
+.transactions-page td.date {
+  width: 6em;
+  text-align: right;
+}
+
+.transactions-page td.amount {
+  text-align: right;
+}
+
+.transactions-page td.name div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transactions-page span.pending {
+  color: #666;
+  white-space: nowrap;
+  margin-left: 0.3em;
+}
+
+.transactions-page table.accounts {
+  max-width: 440px;
+}

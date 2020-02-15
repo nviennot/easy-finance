@@ -1,0 +1,6 @@
+with_env.sh
+node_modules
+.next
+backup.js
+service-account-key.json
+.now
