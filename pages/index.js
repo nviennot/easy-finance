@@ -128,16 +128,13 @@ function Balance(props) {
 }
 
 function TransactionRow(props) {
-  const { date, account, name, pending, amount } = props;
+  const { date, account, name, pending, amount, importance } = props;
 
   const rowClass = (() => {
     let classes = []
 
-    if (/* Credit card refunds are marked as un important */
-        (account.type === 'credit' && amount <= 0) ||
-        /* Checking account are mostly unimportant transfers */
-        (account.type === 'depository'))
-      classes.push('unimportant');
+    if (importance)
+      classes.push(`${importance}-importance`);
 
     if (pending)
       classes.push('pending');

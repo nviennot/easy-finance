@@ -5,8 +5,9 @@ table {
 }
 
 table td, table th {
-  border-top: 1px solid #ddd;
-  padding: 0 1em 0 0;
+  border-top: 0.5px solid #ddd;
+  border-bottom: 0.5px solid #ddd;
+  padding: 0 12px 0 0;
 }
 
 table td:last-child, table th:last-child {
@@ -34,6 +35,24 @@ button.delete-button:hover {
 }
 
 /* Transaction page specific */
+
+.high-importance {
+  color: #d02529;
+}
+
+.low-importance {
+  color: #aaa;
+}
+
+.very-low-importance {
+  font-size: 0.5em;
+  color: #ccc;
+}
+
+.very-low-importance td {
+  border-top: none;
+  border-bottom: none;
+}
 
 .balances {
   margin: 2em;
@@ -84,6 +103,7 @@ button.delete-button:hover {
 .transactions-page table.transactions td.name {
   white-space: normal;
   padding-right: 0.2em;
+  width: 99%;
 }
 
 .transactions-page td.date {
