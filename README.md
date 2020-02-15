@@ -1,20 +1,26 @@
-![screenshot](readme/screen1.png)
-
 # Easy finance
 
 Easy finance is a personal finance accounting tool.
 
 Years ago, I tried the tool Mint, but I thought it was bloated with features I
-didn't care about. I made this tool to suit my needs. This may be useful to
-others, so here are the sources and the instructions to self-host.
+didn't care about, and too slow for answering basic questions.
+
+So I wrote my own tool. My partner and I use it for keeping track of our
+finances on a daily basis, and it has been a complete success.
+
+This tool may be useful to others, so here are the sources and instructions to self-host.
+
+## Screenshot
+
+![screenshot](readme/screen1.png)
 
 ## Features
 
+* Shows financial transactions in near real-time
 * Aggregates multiple checking/saving accounts with credit cards. Each credit
   card is associated with a checking account from which they get paid from.
   Each group of checking account and its associated credit cards are
   aggregated separately, and shown on top of the page for quick access
-* Shows transactions in near real-time
 * Pending transactions are accounted in the balance, and shown with a (P)
   in the transaction list
 * Checking account transactions and refunds are shown in light gray
@@ -55,8 +61,9 @@ Plaid is used to retreive all the bank data.
 Firebase is used to store the application settings.
 
 * Go to [firebase.google.com](https://firebase.google.com/) and register an account
-* Create a new project
-* Create a new Realtime Database.
+* Create a new project. No need to connect to Analytics if asked.
+* In _Develop_ →  _Database_ → _Create a new Database_. Select production mode,
+  and a datacenter closest to you if asked.
 * In _Settings_ → _Project Settings_ → _Service accounts_,
   click on _Generate new private key_. This should download a .json file
   Save it as `service-account-key.json` in the root of the repository
@@ -81,7 +88,7 @@ npm run dev
 ### 6. Configure bank accounts
 
 Configure accounts to your liking. Below shows a screenshot of what to expect.
-Once configured, click on _Go Back_ to see the list of transactions.
+Once configured, click on _Save_ which takes you back to the list of transactions.
 
 ![screenshot](readme/screen2.png)
 

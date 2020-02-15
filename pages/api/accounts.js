@@ -10,6 +10,9 @@ async function get(req, res) {
 
   const getBankProps = async bank => {
     try {
+      if (bank.deleted)
+        return { accounts: [], deleted: true };
+
       let accounts = await Bank.getAccounts(bank);
       accounts = accounts.filter(a => allowedTypes.includes(a.type));
       return { accounts };
@@ -69,46 +72,40 @@ function applyBankSchema(bank) {
 }
 
 async function put(req, res) {
-  let banks = req.body.banks;
-
-  if (!(banks instanceof Array))
-    return res.status(500).json({ });
+  let { banks, publicToken } = req.body;
+  banks = banks || [];
 
   banks = banks.map(applyBankSchema);
+
+  if (publicToken) {
+    let bank = await Bank.getBankFromPublicToken(publicToken);
+    bank._index = banks.length;
+    banks.push(bank);
+  }
+
   await DB.putBanks(banks);
 
+  /*
+   * TODO XXX banks with "deleted": true should be removed.
+   * Note that in plaid dev mode, the number of account does not
+   * decrement
+   */
+
+  /*
   const deleteBanks = (banksToDelete) => {
-    /* TODO XXX banks with "deleted": true should be removed.
-     * Note that in dev mode, the number of account does not
-     * decrement
-     */
-    /*
     leftJoin(banksToDelete, DB.getBanks(), ...)
     for each: DB.forgetBank()
-    */
   }
-  //deleteBanks(banks.filter(bank => bank.deleted));
+  deleteBanks(banks.filter(bank => bank.deleted));
+  */
 
-  res.status(200).json({ });
+  return await get(req, res);
 }
-
-
-async function post(req, res) {
-  const { publicToken, index } = req.body;
-  const bank = await Bank.getBankFromPublicToken(publicToken);
-
-  /* special hint for our firebase object to be at a specific order */
-  bank._index = index;
-
-  await DB.putBanks([bank]);
-  res.status(200).json({ });
-}
-
 
 export default async (req, res) => {
   if (!ensureAuth(req, res))
     return;
 
-  const m = {'GET': get, 'PUT': put, 'POST': post}
+  const m = {'GET': get, 'PUT': put}
   await m[req.method](req, res);
 };

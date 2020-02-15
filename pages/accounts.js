@@ -32,8 +32,9 @@ export default function AccountsPage(props) {
    * We have to load plaid here. Performance would be hurt if we were to
    * useScript() in The MainForm component as it rerenders often.
    */
-  const { loaded: plaidLoaded, error: plaidError } = useScript(
+  let { loaded: plaidLoaded, error: plaidError } = useScript(
         'https://cdn.plaid.com/link/v2/stable/link-initialize.js');
+  plaidError = plaidError && "Cannot load Plaid extension";
 
   if (error || plaidError)
     return <ErrorPage>{error || plaidError}</ErrorPage>
@@ -47,6 +48,10 @@ export default function AccountsPage(props) {
     if (!plaidLoaded)
       plaidVars = null;
 
+    /*
+     * Setting a key will ensure that we reload the whole form
+     * if banks changes.
+     */
     return (
       <Container maxWidth="sm">
         <NoSSR>
@@ -74,7 +79,7 @@ function MainForm(props) {
    * Maybe not accurate, but that's okay, we'll show the save button as enabled
    * when we should not.
    */
-  const pristine = JSON.stringify(initialBanks) == JSON.stringify(banks);
+  const pristine = JSON.stringify(initialBanks) === JSON.stringify(banks);
 
   /*
    * Credit cards can be payed from checking/savings accounts
@@ -92,9 +97,13 @@ function MainForm(props) {
   const handleAddBank = () => {
     const handlePlaidSuccess = publicToken => {
       const data = { publicToken, index: banks.length };
-      axios.post('/api/accounts', data)
-        .then(response => refetch())
-        .catch(error => setSaveStatus({error: `Error saving bank: ${error}`}));
+      /*
+       * The following saves the current state, and reloads the data.
+       * Could be better (if the user starts typing between now and
+       * until the response comes back, her input would be discarded)
+       * It's fine for now.
+       */
+      handleSave({ publicToken, banks });
     }
     openPlaidLink({ onSuccess: handlePlaidSuccess });
   }
@@ -109,11 +118,19 @@ function MainForm(props) {
     }));
   };
 
-  const handleSave = data => {
+  const handleSave = (data, opts={}) => {
+    const { thenGoBack } = opts;
     setSaveStatus({inProgress: true})
     /* XXX Error message is most likely not informative */
     axios.put('/api/accounts', data)
-      .then(response => { refetch(); router.push('/'); })
+      .then(response => {
+        if (thenGoBack) {
+          router.push('/');
+        } else {
+          setBanks(response.data.banks);
+          setSaveStatus({});
+        }
+      })
       .catch(error => setSaveStatus({error: `Error saving accounts: ${error}`}))
   };
 
@@ -123,7 +140,7 @@ function MainForm(props) {
     <div>
       <h1>Accounts</h1>
 
-      { banks.length == 0
+      { banks.length === 0
         ? <p>Customize accounts by pressing on the button below</p>
         : null
       }
@@ -161,7 +178,7 @@ function MainForm(props) {
 
             <Button
               style={{minWidth: "9em"}}
-              onClick={() => handleSave({ banks })}
+              onClick={() => handleSave({ banks }, {thenGoBack: true})}
               variant="contained"
               disabled={pristine || saveStatus.inProgress}
               color="primary"
@@ -173,7 +190,7 @@ function MainForm(props) {
       </div>
 
       <Snackbar
-        open={saveStatus.error}
+        open={!!saveStatus.error}
         autoHideDuration={6000}
         onClose={handleSnackbarClose}>
 

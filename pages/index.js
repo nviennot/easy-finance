@@ -15,7 +15,7 @@ export default function IndexPage(props) {
   if (error)
     return <ErrorPage>{error}</ErrorPage>
 
-  if (data?.accounts?.length == 0) {
+  if (data?.accounts?.length === 0) {
     router.push('/accounts');
     return null;
   }
@@ -83,11 +83,11 @@ function BalanceSummary(props) {
      * that they are associated with (paidFrom).
      */
     const accountingGroups = groupBy(accounts,
-      a => a.type == 'depository' ? a.id : a.payFrom);
+      a => a.type === 'depository' ? a.id : a.payFrom);
 
     let balances = Object.entries(accountingGroups).map(([id, grp]) => {
       const amount = grp.reduce((sum, a) =>
-        sum + (a.type == 'credit' ? -a.balance : a.balance), 0);
+        sum + (a.type === 'credit' ? -a.balance : a.balance), 0);
 
       return {id, amount};
     });
@@ -134,9 +134,9 @@ function TransactionRow(props) {
     let classes = []
 
     if (/* Credit card refunds are marked as un important */
-        (account.type == 'credit' && amount <= 0) ||
+        (account.type === 'credit' && amount <= 0) ||
         /* Checking account are mostly unimportant transfers */
-        (account.type == 'depository'))
+        (account.type === 'depository'))
       classes.push('unimportant');
 
     if (pending)
