@@ -1,5 +1,6 @@
 #!/bin/bash
 set -eu
+source with_env.sh
 npx now deploy --prod \
 -e NODE_ENV=production \
 -e PASSWORD_SHA1=$PASSWORD_SHA1 \
