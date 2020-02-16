@@ -11,6 +11,10 @@ export default async (req, res) => {
   const requestDays = req.query.days && Number(req.query.days);
   const options = { numPastDays: requestDays || 14 };
 
+  /* For screenshots
+  return res.status(200).json(require("../../transactions.json"));
+  */
+
   const banks = await DB.getBanks();
 
   /* Useful to have a cronjob on this endpoint to refresh the cache periodically */
