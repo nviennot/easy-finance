@@ -55,11 +55,18 @@ button.delete-button:hover {
 }
 
 .transaction-hide {
-  font-size: 0.5em;
-  color: #ccc;
+  font-size: 0.8em;
+  line-height: 1.2;
+  color: #bbb;
 }
 
-.transaction-hide {
+@media (max-width: 450px) {
+  .transaction-hide {
+    font-size: 0.6em;
+  }
+}
+
+.transaction-hide td {
   border-top: none;
   border-bottom: none;
 }
