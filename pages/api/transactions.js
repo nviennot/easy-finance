@@ -1,7 +1,7 @@
 import { zip } from  '../../lib/util.js'
 import * as DB from '../../lib/db'
 import * as Bank from '../../lib/bank'
-import { pick, ensureAuth } from '../../lib/util'
+import { pick, ensureAuth, getCache, putCache } from '../../lib/util'
 import moment from 'moment'
 
 export default async (req, res) => {
@@ -12,8 +12,21 @@ export default async (req, res) => {
   const options = { numPastDays: requestDays || 14 };
 
   const banks = await DB.getBanks();
-  let {accounts, transactions, balance} =
-    await Bank.getCompiledTransactions(banks, options);
+
+  /* Useful to have a cronjob on this endpoint to refresh the cache periodically */
+  const getData = async () => {
+    const cacheKey = {banks, options};
+    let data = getCache(cacheKey);
+    if (data)
+      return data;
+
+    data = await Bank.getCompiledTransactions(banks, options);
+    putCache(cacheKey, data, 10*60*1000); /* 10min expiration */
+
+    return data;
+  }
+
+  let {accounts, transactions, balance} = await getData();
 
   transactions = transactions.map(t => {
     const date = moment(t.date).format('ddd DD MMM');
