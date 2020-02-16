@@ -27,8 +27,5 @@
     "plaid": "^4.5.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
-  },
-  "devDependencies": {
-    "now": "^17.0.3"
   }
 }

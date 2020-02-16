@@ -101,12 +101,13 @@ anywhere.
 * Run the following in the repository directory
 
 ```
-source with_env.sh
+npm install -g now
+now login
 ./deploy.sh
 ```
 
-You may be asked to link your ZEIT account. After a minute or so, you should see
-the deployed URL.
+You may be asked to link your ZEIT account. Answering the default answers should
+do. After a minute or so, you should see the deployed URL.
 
 ## License
 
