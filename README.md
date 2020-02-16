@@ -76,6 +76,8 @@ Firebase is used to store the application settings.
 
 ### 5. Test and configure the application locally
 
+You can use docker if you are familiar with it. Use `source with_env.sh && ./run_docker.sh` and you would be all set. Alternatively, proceed with these steps.
+
 * Run the following in the repository directory
 
 ```

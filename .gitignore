@@ -4,3 +4,4 @@ node_modules
 backup.js
 service-account-key.json
 .now
+docker-env
