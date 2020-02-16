@@ -36,6 +36,16 @@ button.delete-button:hover {
 
 /* Transaction page specific */
 
+/*
+.group-2 {
+  color: rgba(0, 160, 160, 1);
+}
+
+.group-3 {
+  color: rgba(160, 160, 0, 1);
+}
+*/
+
 .high-importance {
   color: #d02529;
 }

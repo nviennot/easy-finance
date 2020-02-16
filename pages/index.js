@@ -31,12 +31,24 @@ function TransactionsPage(props) {
   let { transactions, accounts, options } = props;
   const { numPastDays } = options;
 
-  transactions = leftJoin(transactions, accounts,
-    {key: 'account', foreignKey: 'accountId'});
+  /*
+   * We associate credit cards with the depository account (checking account)
+   * that they are associated with (paidFrom).
+   */
+
+  accounts = accounts.map(a => ({...a, groupId: a.type === 'depository' ? a.id : a.payFrom}));
+  let accountingGroups = groupBy(accounts, a => a.groupId);
+  accountingGroups = Object.entries(accountingGroups).map(([id, grp], i) => (
+                                      {id: id, accounts: grp, index: i}));
+  accountingGroups = leftJoin(accountingGroups, accounts,
+                              {key: 'mainAccount', foreignKey: 'id'});
+
+  accounts = leftJoin(accounts, accountingGroups, {key: 'group', foreignKey: 'groupId'});
+  transactions = leftJoin(transactions, accounts, {key: 'account', foreignKey: 'accountId'});
 
   return (
     <Container maxWidth="md">
-      <BalanceSummary accounts={accounts} />
+      <BalanceSummary {...{accountingGroups}} />
 
       <h2>Transactions</h2>
       <table className="transactions">
@@ -75,38 +87,24 @@ function TransactionsPage(props) {
 }
 
 function BalanceSummary(props) {
-  const { accounts } = props;
+  const { accountingGroups } = props;
 
-  const balances = (() => {
-    /*
-     * We associate credit cards with the depository account (checking account)
-     * that they are associated with (paidFrom).
-     */
-    const accountingGroups = groupBy(accounts,
-      a => a.type === 'depository' ? a.id : a.payFrom);
+  let balances = accountingGroups.map(grp => {
+    const amount = grp.accounts.reduce((sum, a) =>
+      sum + (a.type === 'credit' ? -a.balance : a.balance), 0);
+    const name = grp.mainAccount?.name;
+    return { amount, name };
+  });
 
-    let balances = Object.entries(accountingGroups).map(([id, grp]) => {
-      const amount = grp.reduce((sum, a) =>
-        sum + (a.type === 'credit' ? -a.balance : a.balance), 0);
-
-      return {id, amount};
-    });
-
-    balances = leftJoin(balances, accounts,
-      {key: 'payFrom', foreignKey: 'id'});
-
-    return balances;
-  })();
-
-  const showNames = balances.length > 1;
+  const showNames = accountingGroups.length > 1;
 
   return (
     <div className="balances">
-      {balances.map(balance =>
+      {balances.map(({ amount, name }, i) =>
         <Balance
-          key={balance.id}
-          amount={balance.amount}
-          name={showNames ? balance.payFrom.name : null}
+          key={i}
+          amount={amount}
+          name={showNames ? name : null}
         />)}
     </div>
   );
@@ -138,6 +136,8 @@ function TransactionRow(props) {
 
     if (pending)
       classes.push('pending');
+
+    classes.push(`group-${account.group.index+1}`);
 
     return classes.join(' ');
   })();
