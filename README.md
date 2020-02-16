@@ -54,7 +54,8 @@ cp with_env.template.sh with_env.sh
 Plaid is used to retreive all the bank data.
 
 * Go to [plaid.com](https://plaid.com)
-* Register for a new account. We will be using a free development account
+* Register for a new account. We will be using a free development account that
+  allows up to 5 linked banks.
 * In _Team Settings_ → _Keys_, Copy the `client_id`, `public_key`, and
 `developement secret` into the `with_env.sh` file
 
