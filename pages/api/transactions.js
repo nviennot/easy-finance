@@ -17,7 +17,7 @@ export default async (req, res) => {
 
   transactions = transactions.map(t => {
     const date = moment(t.date).format('ddd DD MMM');
-    return {date, ...pick(t, ['accountId', 'amount', 'name', 'pending', 'importance'])};
+    return {date, ...pick(t, ['accountId', 'amount', 'name', 'pending', 'displayClass'])};
   });
 
   accounts = accounts.map(a => {

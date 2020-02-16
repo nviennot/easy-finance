@@ -46,20 +46,20 @@ button.delete-button:hover {
 }
 */
 
-.high-importance {
+.transaction-warning {
   color: #d02529;
 }
 
-.low-importance {
-  color: #aaa;
+.transaction-refund {
+  color: rgba(0, 120, 0, 0.7);
 }
 
-.very-low-importance {
+.transaction-hide {
   font-size: 0.5em;
   color: #ccc;
 }
 
-.very-low-importance td {
+.transaction-hide {
   border-top: none;
   border-bottom: none;
 }

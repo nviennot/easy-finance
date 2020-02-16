@@ -126,13 +126,13 @@ function Balance(props) {
 }
 
 function TransactionRow(props) {
-  const { date, account, name, pending, amount, importance } = props;
+  const { date, account, name, pending, amount, displayClass } = props;
 
   const rowClass = (() => {
     let classes = []
 
-    if (importance)
-      classes.push(`${importance}-importance`);
+    if (displayClass)
+      classes.push(`transaction-${displayClass}`);
 
     if (pending)
       classes.push('pending');
