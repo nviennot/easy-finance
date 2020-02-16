@@ -17,14 +17,15 @@ This tool may be useful to others, so here are the sources and instructions to s
 ## Features
 
 * Shows financial transactions in near real-time
-* Runs as a web applications
+* Runs as a web applications, so it's easy to share with a partner
+* Has a UI to configure the application and link new accounts when needs be
 * Aggregates multiple checking/saving accounts with credit cards. Each credit
   card is associated with a checking account from which they get paid from.
   Each group of checking account and its associated credit cards are
   aggregated separately, and shown on top of the page for quick access
 * Pending transactions are accounted in the balance, and shown with a (P)
   in the transaction list
-* Automatic transfers and credit cards payments are shown is small. Refunds in
+* Automatic transfers and credit cards payments are shown is small, refunds in
   green.
 * Access to the balances is speedy with a page load is under 1 second
 * Easy to configure (and reconfigure) bank accounts and credit cards
@@ -76,7 +77,9 @@ Firebase is used to store the application settings.
 
 ### 5. Test and configure the application locally
 
-You can use docker if you are familiar with it. Use `source with_env.sh && ./run_docker.sh` and you would be all set. Alternatively, proceed with these steps.
+You can use docker if you are familiar with it. Use `source with_env.sh &&
+./run_docker.sh` and you would be all set. Alternatively, proceed with the
+following steps.
 
 * Run the following in the repository directory
 
