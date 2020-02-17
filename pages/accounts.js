@@ -82,7 +82,7 @@ function MainForm(props) {
   const pristine = JSON.stringify(initialBanks) === JSON.stringify(banks);
 
   /*
-   * Credit cards can be payed from checking/savings accounts
+   * Credit cards can be paid from checking/savings accounts
    * denoted by the type depository
    */
   const payFroms = banks
@@ -345,7 +345,7 @@ function AccountFields(props) {
 
       {isCredit ?
         <FormControl style={{marginLeft: "1em", width: "12em"}} >
-          <InputLabel error={payFromError}>Card payed from</InputLabel>
+          <InputLabel error={payFromError}>Card paid from</InputLabel>
           <NativeSelect
             error={payFromError}
             value={payFrom}
