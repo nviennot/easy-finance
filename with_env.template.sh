@@ -5,8 +5,8 @@ export PASSWORD=XXX
 
 # Fill in the plaid account information
 export PLAID_CLIENT_ID=XXX
-export PLAID_SECRET=XXX
 export PLAID_PUBLIC_KEY=XXX
+export PLAID_SECRET=XXX
 export PLAID_ENV=development
 
 # the service-account-key.json file is obtained by clicking
