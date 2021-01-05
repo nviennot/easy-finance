@@ -17,7 +17,7 @@
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.41",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "axios-hooks": "^1.9.0",
     "deepmerge": "^4.2.2",
     "firebase-admin": "^8.9.2",
