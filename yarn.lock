@@ -4456,9 +4456,9 @@ lodash.templatesettings@^4.0.0:
     lodash._reinterpolate "^3.0.0"
 
 lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.4:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 log-symbols@^2.2.0:
   version "2.2.0"
@@ -4953,11 +4953,6 @@ normalize-url@1.9.1:
     prepend-http "^1.0.0"
     query-string "^4.1.0"
     sort-keys "^1.0.0"
-
-now@^17.0.3:
-  version "17.0.3"
-  resolved "https://registry.yarnpkg.com/now/-/now-17.0.3.tgz#74f2ed05cc1814b475f1c51c0f2e5adbb745d7d7"
-  integrity sha512-poZW/PaAXNExf5Aypri+pmtbAWQB/jkEdPpF8MaaWYylAhBZUYk3tbyNmMLeJNxt9V8h1EnGLUwTAakjMEXcJA==
 
 num2fraction@^1.2.2:
   version "1.2.2"
