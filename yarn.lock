@@ -4954,11 +4954,6 @@ normalize-url@1.9.1:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
-now@^17.0.3:
-  version "17.0.3"
-  resolved "https://registry.yarnpkg.com/now/-/now-17.0.3.tgz#74f2ed05cc1814b475f1c51c0f2e5adbb745d7d7"
-  integrity sha512-poZW/PaAXNExf5Aypri+pmtbAWQB/jkEdPpF8MaaWYylAhBZUYk3tbyNmMLeJNxt9V8h1EnGLUwTAakjMEXcJA==
-
 num2fraction@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/num2fraction/-/num2fraction-1.2.2.tgz#6f682b6a027a4e9ddfa4564cd2589d1d4e669ede"
@@ -5234,9 +5229,9 @@ path-is-inside@^1.0.1:
   integrity sha1-NlQX3t5EQw0cEa9hAn+s8HS9/FM=
 
 path-parse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
-  integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
+  integrity sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==
 
 path-to-regexp@6.1.0:
   version "6.1.0"
